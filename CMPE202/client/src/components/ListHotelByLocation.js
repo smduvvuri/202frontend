@@ -4,11 +4,6 @@ import {useEffect, useState} from "react";
 import {Card, Button} from "react-bootstrap";
 import axios from "axios";
 
-let config = {
-    headers: {
-        authorization: JSON.parse(localStorage.getItem('auth')).result.token
-    }
-}
 
 function ListHotelByLocation(){
 
@@ -22,7 +17,11 @@ function ListHotelByLocation(){
     useEffect(()=> {
         if(!login) return;
 
-        axios.post(`${process.env.REACT_APP_API}/getAllHotels/${login}`, config)
+        axios.post(`${process.env.REACT_APP_API}/getAllHotels/${login}`, {
+            headers: {
+                authorization: JSON.parse(localStorage.getItem('auth')).result.token
+            }
+        })
         .then((response) => response.json())
         .then(setData)
       }, [login]);

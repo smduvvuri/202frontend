@@ -10,11 +10,11 @@ import ConnectNav from "../components/ConnectNav";
 import AdminHotelNav from "../components/AdminHotelNav";
 import {Link} from "react-router-dom";
 
-let config = {
-    headers: {
-        authorization: JSON.parse(localStorage.getItem('auth')).result.token
-    }
-}
+// let config = {
+//     headers: {
+//         authorization:  JSON.parse(localStorage.getItem('auth')).result.token
+//     }
+// }
 
 // const listItems;
 
@@ -27,7 +27,11 @@ export default class AllHotels extends React.Component {
     //     await axios.post(`${process.env.REACT_APP_API}/addHotel`, hotel, config);
 
     componentDidMount() {
-        axios.post(`${process.env.REACT_APP_API}/getAllHotels`, config)
+        axios.post(`${process.env.REACT_APP_API}/getAllHotels`, {
+            headers: {
+                authorization:  JSON.parse(localStorage.getItem('auth')).result.token
+            }
+        })
             .then(res => {
                 const hotels = res.data.hotels;
 
