@@ -11,8 +11,6 @@ const UserDashboard = () => {
       <div className="container-fluid p-4">
         <UserDashboardNav />
       </div>
-
-    
     </>
   );
 };

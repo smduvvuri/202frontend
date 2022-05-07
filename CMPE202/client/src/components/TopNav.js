@@ -6,6 +6,7 @@ const TopNav = () => {
   const dispatch = useDispatch();
   const { auth } = useSelector((state) => ({ ...state }));
   const history = useHistory();
+  const active = window.location.pathname;
 
   const logout = () => {
     dispatch({
