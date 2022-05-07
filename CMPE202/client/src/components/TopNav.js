@@ -18,7 +18,13 @@ const TopNav = () => {
 
   return (
     <div className="nav bg-light d-flex justify-content-between">
-     
+
+      {auth !== null  && (
+          <Link className="nav-link" to="/ProfileNav">
+            Profile
+          </Link>
+      )}
+
       {auth !== null && auth.result.adminType === `admin` && (
         <Link className="nav-link" to="/hotelNav">
           Hotels
