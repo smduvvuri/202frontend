@@ -8,14 +8,18 @@ console.log("in admin.js");
 //console.log(localStorage.getItem('auth'));
 console.log("here");
 
-let config = {
-    headers: {
-        authorization: localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')).result.token: ""
-    }
-}
+// let config = {
+//     headers: {
+//         authorization: localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')).result.token: ""
+//     }
+// }
 
 export const addhotel = async (hotel) =>
-  await axios.post(`${process.env.REACT_APP_API}/addHotel`, hotel, config);
+  await axios.post(`${process.env.REACT_APP_API}/addHotel`, hotel, {
+      headers: {
+          authorization: localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')).result.token: ""
+      }
+  });
 
  export const login = async (user) =>
 await axios.post(`${process.env.REACT_APP_API}/signin`, user);

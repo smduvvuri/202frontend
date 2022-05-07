@@ -6,11 +6,11 @@ import ConnectNav from "../components/ConnectNav";
 import UserDashboardNav from './UserDashboardNav';
 
 
-let config = {
-    headers: {
-        authorization: JSON.parse(localStorage.getItem('auth')).result.token
-    }
-}
+// let config = {
+//     headers: {
+//         authorization: JSON.parse(localStorage.getItem('auth')).result.token
+//     }
+// }
 
 let searchResult=false;
 
@@ -43,7 +43,11 @@ export default class ListHotels extends React.Component {
 
           console.log(data);
         
-          axios.post(`${process.env.REACT_APP_API}/getHotelFromLocation`, data, config).then((response) => {
+          axios.post(`${process.env.REACT_APP_API}/getHotelFromLocation`, data, {
+              headers: {
+                  authorization: JSON.parse(localStorage.getItem('auth')).result.token
+              }
+          }).then((response) => {
             console.log(response.data.message);
             if (response.data) {
                 searchResult=true;
@@ -57,7 +61,11 @@ export default class ListHotels extends React.Component {
       };
 
     componentDidMount() {
-        axios.post(`${process.env.REACT_APP_API}/getAllHotels`, config)
+        axios.post(`${process.env.REACT_APP_API}/getAllHotels`, {
+            headers: {
+                authorization: JSON.parse(localStorage.getItem('auth')).result.token
+            }
+        })
             .then(res => {
                 const hotels = res.data.hotels;
                 console.log(hotels);
