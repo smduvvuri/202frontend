@@ -3,6 +3,14 @@ import React from 'react';
 import { Button } from "react-bootstrap";
 import axios from "axios";
 import ConnectNav from "../components/ConnectNav";
+import UserDashboardNav from './UserDashboardNav';
+
+
+let config = {
+    headers: {
+        authorization: JSON.parse(localStorage.getItem('auth')).result.token
+    }
+}
 
 let searchResult=false;
 
@@ -18,7 +26,6 @@ export default class ListHotels extends React.Component {
         };
       
       }
-
 
     onChange = (e) => {
         console.log("in on change method");
@@ -36,11 +43,7 @@ export default class ListHotels extends React.Component {
 
           console.log(data);
         
-          axios.post(`${process.env.REACT_APP_API}/getHotelFromLocation`, data, {
-              headers: {
-                  authorization: JSON.parse(localStorage.getItem('auth')).result.token
-              }
-          }).then((response) => {
+          axios.post(`${process.env.REACT_APP_API}/getHotelFromLocation`, data, config).then((response) => {
             console.log(response.data.message);
             if (response.data) {
                 searchResult=true;
@@ -54,11 +57,7 @@ export default class ListHotels extends React.Component {
       };
 
     componentDidMount() {
-        axios.post(`${process.env.REACT_APP_API}/getAllHotels`, {
-            headers: {
-                authorization: JSON.parse(localStorage.getItem('auth')).result.token
-            }
-        })
+        axios.post(`${process.env.REACT_APP_API}/getAllHotels`, config)
             .then(res => {
                 const hotels = res.data.hotels;
                 console.log(hotels);
@@ -67,18 +66,17 @@ export default class ListHotels extends React.Component {
         console.log(this.state.hotels);
     }
 
-
-
-
     render() {
-
-        console.log(this.props);
-  
         return (
             <>
                 <div className="container-fluid bg-secondary p-5">
                     <ConnectNav/>
                 </div>
+
+                <div className="container-fluid p-4">
+        <UserDashboardNav />
+      </div>
+                
             <form onSubmit={this.onSubmit}>
                 <div style={{display:'flex', flexDirection:'row'}}>
                 

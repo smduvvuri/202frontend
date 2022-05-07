@@ -18,7 +18,7 @@ import Billing from "./components/Billing";
 import Booking from "./components/Booking";
 import ListHotels from "./components/ListHotels";
 import ListHotelByLocation from "./components/ListHotelByLocation";
-
+import SearchHotelDashboard from "./components/SearchHotelDashboard";
 
 function App() {
   return (
@@ -41,6 +41,7 @@ function App() {
         <PrivateRoute exact path="/hotel/add" component={AddHotel} />
         <PrivateRoute exact path="/hotel/all" component={AllHotels} />
         <PrivateRoute exact path="/hotelNav" component={HotelManagement} />
+        <PrivateRoute exact path="/searchHotelDashboard" component={SearchHotelDashboard} />
       </Switch>
     </BrowserRouter>
   );
