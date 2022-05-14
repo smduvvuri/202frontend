@@ -146,7 +146,7 @@ export default class ListHotelByLocation extends React.Component {
              
                 <Link to={{ 
  pathname: "/selectbookingdates", 
- state: val.hotelNumber 
+ state: val.hotelLocation 
 }}>
  Select Booking Dates
 </Link>
