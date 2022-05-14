@@ -4,7 +4,6 @@ import { Button} from "react-bootstrap";
 import axios from "axios";
 import ConnectNav from "../components/ConnectNav";
 import UserDashboardNav from './UserDashboardNav';
-import Table from './Table';
 
 
 // let config = {
@@ -44,11 +43,19 @@ export default class ListHotelByLocation extends React.Component {
           };
 
         
+
           axios.post(`${process.env.REACT_APP_API}/getHotelFromLocation`, data, {
               headers: {
                   authorization: JSON.parse(localStorage.getItem('auth')).result.token
               }
           }).then((response) => {
+
+        //   axios.post(`${process.env.REACT_APP_API}/getHotelFromLocation`, data,  {
+        //     headers: {
+        //         authorization: localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')).result.token: ""
+        //     }
+        // }).then((response) => {
+
             if (response.data) {
                 searchResult=true;
                 const result = response.data.hotels;
@@ -64,8 +71,7 @@ export default class ListHotelByLocation extends React.Component {
             headers: {
                 authorization: JSON.parse(localStorage.getItem('auth')).result.token
             }
-        })
-            .then(res => {
+        }).then(res => {
                 const hotels = res.data.hotels;
                 this.setState({hotels});
             })
