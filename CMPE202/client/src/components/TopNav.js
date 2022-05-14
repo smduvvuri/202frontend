@@ -37,8 +37,8 @@ const TopNav = () => {
           </Link>
       )}
 
-      {auth !== null && auth.result.adminType === `admin` && (
-          <Link className="nav-link" to="/adminBookingNav">
+      {auth !== null &&  (
+          <Link className="nav-link" to="/bookingNav">
             Bookings
           </Link>
       )}
@@ -61,11 +61,11 @@ const TopNav = () => {
           </Link>
       )} 
 
-      {auth !== null && auth.result.adminType === `user` && (
-          <Link className="nav-link" to="/booking">
-            Bookings
-          </Link>
-      )}   
+      {/*{auth !== null && auth.result.adminType === `user` && (*/}
+      {/*    <Link className="nav-link" to="/booking">*/}
+      {/*      Bookings*/}
+      {/*    </Link>*/}
+      {/*)}   */}
 
       {auth !== null && (
         <a className="nav-link pointer" onClick={logout}>

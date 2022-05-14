@@ -119,6 +119,9 @@ export default class AllHotels extends React.Component {
                                     <th style={{width: '100px'}}>
                                         <label className="form-label">Season</label>
                                     </th>
+                                    <th style={{width: '100px'}}>
+                                        <label className="form-label">Guest</label>
+                                    </th>
 
                                 {/*</div>*/}
                             </tr>
@@ -166,6 +169,9 @@ export default class AllHotels extends React.Component {
                                         </td>
                                         <td style={{width: '100px'}} key={hotel.hotelNumber}>
                                             {hotel.seasonCharge}
+                                        </td>
+                                        <td style={{width: '100px'}} key={hotel.hotelNumber}>
+                                            {hotel.extraGuestCharge}
                                         </td>
                                     </tr>)
                             }

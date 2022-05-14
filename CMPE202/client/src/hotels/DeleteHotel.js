@@ -437,6 +437,23 @@ export default class DeleteHotel extends React.Component {
                   </td>
                 </div>
               </tr>
+              <tr>
+                <div className="form-group mb-3">
+                  <td style={{width: '250px'}}>
+                    <label className="form-label">Extra Guest Charge</label>
+                  </td>
+                  <td style={{width: `400px`}}>
+                    <input
+                        name = "extraGuestCharge"
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Extra Guest Charge"
+                        value={this.state.hotel.extraGuestCharge}
+                        onChange={this.onChange}
+                    />
+                  </td>
+                </div>
+              </tr>
 
 
             </table>

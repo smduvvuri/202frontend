@@ -1,6 +1,6 @@
 const AddHotelForm = ({
                           handleSubmit,
-                          hotelNumber, setHotelNumber,
+                          // hotelNumber, setHotelNumber,
                           hotelName, setHotelName,
                           hotelDescription, setHotelDescription,
                           hotelLocation, setHotelLocation,
@@ -14,27 +14,28 @@ const AddHotelForm = ({
                           hotelCharge, setHotelCharge,
                           weekendCharge, setWeekendCharge,
                           holidayCharge, setHolidayCharge,
-                          seasonCharge, setSeasonCharge
+                          seasonCharge, setSeasonCharge,
+                          extraGuestCharge, setExtraGuestCharge
 
 }) => (
   <form onSubmit={handleSubmit} className="mt-3">
       <table >
-          <tr>
-              <div className="form-group mb-3">
-                  <td style={{width: '250px'}}>
-                      <label className="form-label">Hotel Number</label>
-                  </td>
-                  <td style={{width: `400px`}}>
-                      <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Enter Hotel Number For Reference"
-                          value={hotelNumber}
-                          onChange={(e) => setHotelNumber(e.target.value)}
-                      />
-                  </td>
-              </div>
-          </tr>
+          {/*<tr>*/}
+          {/*    <div className="form-group mb-3">*/}
+          {/*        <td style={{width: '250px'}}>*/}
+          {/*            <label className="form-label">Hotel Number</label>*/}
+          {/*        </td>*/}
+          {/*        <td style={{width: `400px`}}>*/}
+          {/*            <input*/}
+          {/*                type="text"*/}
+          {/*                className="form-control"*/}
+          {/*                placeholder="Enter Hotel Number For Reference"*/}
+          {/*                value={hotelNumber}*/}
+          {/*                onChange={(e) => setHotelNumber(e.target.value)}*/}
+          {/*            />*/}
+          {/*        </td>*/}
+          {/*    </div>*/}
+          {/*</tr>*/}
           <tr>
               <div className="form-group mb-3">
                   <td style={{width: '250px'}}>
@@ -259,11 +260,27 @@ const AddHotelForm = ({
                   </td>
               </div>
           </tr>
+          <tr>
+              <div className="form-group mb-3">
+                  <td style={{width: '250px'}}>
+                      <label className="form-label">Extra Guest Charge</label>
+                  </td>
+                  <td style={{width: `400px`}}>
+                      <input
+                          type="text"
+                          className="form-control"
+                          placeholder="Enter Extra Guest Charge"
+                          value={extraGuestCharge}
+                          onChange={(e) => setExtraGuestCharge(e.target.value)}
+                      />
+                  </td>
+              </div>
+          </tr>
 
 
       </table>
 
-      <button disabled={!hotelName || !hotelLocation || !hotelCharge || !weekendCharge || !holidayCharge || !seasonCharge} className="btn btn-primary">
+      <button disabled={!hotelName || !hotelLocation || !hotelCharge || !weekendCharge || !holidayCharge || !seasonCharge || !extraGuestCharge} className="btn btn-primary">
           Add Hotel
       </button>
   </form>

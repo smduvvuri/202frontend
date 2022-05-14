@@ -8,7 +8,7 @@ import AdminHotelNav from "../components/AdminHotelNav";
 import { Link } from "react-router-dom";
 
 const AddHotel = ({ history }) => {
-  const [hotelNumber, setHotelNumber] = useState("");
+  // const [hotelNumber, setHotelNumber] = useState("");
   const [hotelName, setHotelName] = useState("");
   const [hotelDescription, setHotelDescription] = useState("");
   const [hotelLocation, setHotelLocation] = useState("");
@@ -25,6 +25,7 @@ const AddHotel = ({ history }) => {
   const [weekendCharge, setWeekendCharge] = useState("");
   const [holidayCharge, setHolidayCharge] = useState("");
   const [seasonCharge, setSeasonCharge] = useState("");
+  const [extraGuestCharge, setExtraGuestCharge] = useState("");
 
   // const hotelNumber = "1";
 
@@ -32,8 +33,8 @@ const AddHotel = ({ history }) => {
     e.preventDefault();
     try {
       const res = await addhotel({
-        hotelNumber, hotelName, hotelDescription, hotelLocation, hotelAddress, hotelImage, breakfast, meal, gym, pool, parking,
-        hotelCharge, weekendCharge, holidayCharge, seasonCharge
+         hotelName, hotelDescription, hotelLocation, hotelAddress, hotelImage, breakfast, meal, gym, pool, parking,
+        hotelCharge, weekendCharge, holidayCharge, seasonCharge, extraGuestCharge
       });
       console.log("Add Hotel ===> ", res);
       toast.success("Hotel Added Successfully");
@@ -61,8 +62,8 @@ const AddHotel = ({ history }) => {
             <div className="col-md-6 offset-md-3">
               <RegisterForm
                   handleSubmit={handleSubmit}
-                  hotelNumber={hotelNumber}
-                  setHotelNumber={setHotelNumber}
+                  // hotelNumber={hotelNumber}
+                  // setHotelNumber={setHotelNumber}
                   hotelName={hotelName}
                   setHotelName={setHotelName}
                   hotelDescription={hotelDescription}
@@ -93,6 +94,8 @@ const AddHotel = ({ history }) => {
                   setHolidayCharge={setHolidayCharge}
                   seasonCharge={seasonCharge}
                   setSeasonCharge={setSeasonCharge}
+                  extraGuestCharge={extraGuestCharge}
+                  setExtraGuestCharge={setExtraGuestCharge}
               />
             </div>
           </div>

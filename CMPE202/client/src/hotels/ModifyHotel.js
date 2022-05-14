@@ -30,9 +30,9 @@ export default class ModifyHotel extends React.Component {
 
 
   onChange = (e) => {
-    // console.log("in on change method");
-    // console.log(e.target.name);
-    // console.log(e.target.value);
+    console.log("in on change method");
+    console.log(e.target.name);
+    console.log(e.target.value);
     this.setState({
       [e.target.name]: e.target.value,
     });
@@ -56,7 +56,8 @@ export default class ModifyHotel extends React.Component {
       hotelCharge: this.state.hotelCharge,
       weekendCharge: this.state.weekendCharge,
       holidayCharge: this.state.holidayCharge,
-      seasonCharge: this.state.seasonCharge
+      seasonCharge: this.state.seasonCharge,
+      extraGuestCharge: this.state.extraGuestCharge
 
     };
 
@@ -64,7 +65,8 @@ export default class ModifyHotel extends React.Component {
 
     axios.post(`${process.env.REACT_APP_API}/updateHotel`, data, {
       headers: {
-        authorization: localStorage.getItem('auth') && JSON.parse(localStorage.getItem('auth')).result.token
+        // authorization: localStorage.getItem('auth') && JSON.parse(localStorage.getItem('auth')).result.token
+        authorization: JSON.parse(localStorage.getItem('auth')).result.token
       }
     }).then((response) => {
 
@@ -93,7 +95,7 @@ export default class ModifyHotel extends React.Component {
 
     axios.post(`${process.env.REACT_APP_API}/getHotel`, data, {
       headers: {
-        authorization: localStorage.getItem('auth') && JSON.parse(localStorage.getItem('auth')).result.token
+        authorization: JSON.parse(localStorage.getItem('auth')).result.token
       }
     }).then((response) => {
       console.log(response.data.hotel);
@@ -112,7 +114,7 @@ export default class ModifyHotel extends React.Component {
   componentDidMount() {
     axios.post(`${process.env.REACT_APP_API}/getAllHotels`, {
       headers: {
-        authorization: localStorage.getItem('auth') && JSON.parse(localStorage.getItem('auth')).result.token
+        authorization: JSON.parse(localStorage.getItem('auth')).result.token
       }
     })
         .then(res => {
@@ -447,6 +449,23 @@ export default class ModifyHotel extends React.Component {
                         className="form-control"
                         placeholder="Enter Season Charge"
                         defaultValue={this.state.hotel.seasonCharge}
+                        onChange={this.onChange}
+                    />
+                  </td>
+                </div>
+              </tr>
+              <tr>
+                <div className="form-group mb-3">
+                  <td style={{width: '250px'}}>
+                    <label className="form-label">Extra Guest Charge</label>
+                  </td>
+                  <td style={{width: `400px`}}>
+                    <input
+                        name = "extraGuestCharge"
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Extra Guest Charge"
+                        defaultValue={this.state.hotel.extraGuestCharge}
                         onChange={this.onChange}
                     />
                   </td>

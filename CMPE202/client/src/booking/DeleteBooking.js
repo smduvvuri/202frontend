@@ -1,15 +1,16 @@
 import React, {useState} from 'react';
 
 import axios from "axios";
-import AdminRoomNav from "../components/AdminRoomNav";
+import AdminHotelNav from "../components/AdminHotelNav";
 import ConnectNav from "../components/ConnectNav";
+import BookingNav from "../components/BookingNav";
 import {Button} from "antd";
 import RegisterForm from "../components/AddHotelForm";
 import {toast} from "react-toastify";
 
 let searchResult=false;
 
-export default class ModifyRoom extends React.Component {
+export default class DeleteBooking extends React.Component {
 
 
 
@@ -22,70 +23,35 @@ export default class ModifyRoom extends React.Component {
       errors: {},
       message: "",
       isSafe: false,
-      hotels: [],
-      rooms: [],
-      room: {}
+      bookings: [],
+      booking: {}
     };
 
   }
 
 
   onChange = (e) => {
-
     console.log("in on change method");
-    console.log(this.state.hotelNumber);
     console.log(e.target.name);
     console.log(e.target.value);
     this.setState({
       [e.target.name]: e.target.value,
-    }, () => {
-
-            console.log(this.state.hotelNumber);
-
-            if(e.target.name == "hotelNumber" && this.state.hotelNumber != "please select"){
-              let data = {
-                hotelNumber: this.state.hotelNumber
-              }
-              axios.post(`${process.env.REACT_APP_API}/getRoomFromHotel`, data, {
-                headers: {
-                  authorization: JSON.parse(localStorage.getItem('auth')).result.token
-                }
-              }).then((response) => {
-                console.log(response.data.rooms);
-                if (response.data) {
-                  searchResult=true;
-                  // console.log(searchResult);
-                  this.setState({
-                    rooms: response.data.rooms,
-                  });
-                  console.log("response \n"+this.state.hotel.hotelNumber);
-                }
-              });
-            }
-        }
-    );
+    });
   };
 
   onSubmit = (e) => {
     e.preventDefault();
     // console.log(this.state.hotelNumber);
     let data = {
-      hotelNumber: this.state.hotelNum,
-      roomNumber: (this.state.roomNumber)?this.state.roomNumber:this.state.room.roomNumber,
-      type: this.state.type,
-      image: this.state.image,
-      description: this.state.description,
-      typeCharge: this.state.typeCharge,
-      roomBasePrice: this.state.roomBasePrice,
-      currentPrice: this.state.currentPrice
+      bookingNumber: this.state.booking.bookingNumber
 
     };
 
     // console.log(data);
 
-    axios.post(`${process.env.REACT_APP_API}/updateRoom`, data, {
+    axios.post(`${process.env.REACT_APP_API}/deleteBookingFromId`, data, {
       headers: {
-        authorization: JSON.parse(localStorage.getItem('auth')).result.token
+        authorization:  JSON.parse(localStorage.getItem('auth')).result.token
       }
     }).then((response) => {
 
@@ -96,8 +62,8 @@ export default class ModifyRoom extends React.Component {
         // this.setState({
         //   hotel: response.data.hotel,
         // });
-        toast.success("Room Updated Successfully");
-        console.log("updated ");
+        toast.success("Booking Cancelled Successfully");
+        console.log("deleted ");
       }
     });
 
@@ -107,41 +73,49 @@ export default class ModifyRoom extends React.Component {
     e.preventDefault();
     // console.log(this.state.hotelNumber);
     let data = {
-      roomNumber: this.state.roomNumber,
+      bookingNumber: this.state.bookingNumber,
     };
 
     // console.log(data);
 
-    axios.post(`${process.env.REACT_APP_API}/getRoom`, data, {
+    axios.post(`${process.env.REACT_APP_API}/getBookingFromBookingNumber`, data, {
       headers: {
-        authorization: JSON.parse(localStorage.getItem('auth')).result.token
+        authorization: localStorage.getItem('auth') && JSON.parse(localStorage.getItem('auth')).result.token
       }
     }).then((response) => {
-      console.log(response.data.room);
+      console.log(response.data.booking);
       if (response.data) {
         searchResult=true;
         // console.log(searchResult);
         this.setState({
-          room: response.data.room,
+          booking: response.data.booking[0]
+        },  () => {
+          console.log(response.data.booking);
+          console.log("response \n"+this.state.booking.bookingNumber);
         });
-        console.log("response \n"+this.state.room.roomNumber);
+
       }
     });
 
   };
 
   componentDidMount() {
-    axios.post(`${process.env.REACT_APP_API}/getAllHotels`, {
+    let data = {
+      userId: JSON.parse(localStorage.getItem('auth')).result.userId
+    };
+
+    axios.post(`${process.env.REACT_APP_API}/getBookingFromUserId`, data, {
       headers: {
-        authorization: JSON.parse(localStorage.getItem('auth')).result.token
+        authorization:  JSON.parse(localStorage.getItem('auth')).result.token
       }
     })
         .then(res => {
-          const hotels = res.data.hotels;
-          console.log(hotels);
-          this.setState({hotels});
+          const bookings = res.data.bookings;
+
+          console.log(bookings);
+          this.setState({bookings});
         })
-    console.log(this.state.hotels);
+    console.log(this.state.bookings);
   }
 
 
@@ -159,10 +133,10 @@ export default class ModifyRoom extends React.Component {
 
 
           <div className="container-fluid p-4">
-            <AdminRoomNav />
+            <BookingNav />
           </div>
 
-          <form  className="mt-3">
+          <form onSubmit={this.onSubmit} className="mt-3">
             {/*<div style={{display:'flex', flexDirection:'row'}}>*/}
 
             <center>
@@ -170,46 +144,21 @@ export default class ModifyRoom extends React.Component {
                 <tr>
                   <div className="form-group mb-3">
                     <td style={{width: '150px'}}>
-                      <label className="form-label">Hotel Number</label>
+                      <label className="form-label">Booking Number</label>
                     </td>
                     <td style={{width: `150px`}}>
                       <select style={{width: `150px`}}
-                          name='hotelNumber'
+                          name='bookingNumber'
                           onChange={this.onChange}
-                          // value={this.state.fields["hotelNumber"]}
+                          value={this.state.fields["bookingNumber"]}
                           required>
-                            <option value="please select" key="please select">
-                              Please Select
-                            </option>
-                        {this.state.hotels.map((i) => {
-                          return (
-                              <option value={i.hotelNumber} key={i.hotelNumber}>
-                                {i.hotelNumber}
-                              </option>
-                          );
-                        })}
-                      </select>
-                    </td>
-                    <td style={{width: '50px'}}>
-
-                    </td>
-
-                    <td style={{width: '150px'}}>
-                      <label className="form-label">Room Number</label>
-                    </td>
-                    <td style={{width: `150px`}}>
-                      <select style={{width: `150px`}}
-                              name='roomNumber'
-                              onChange={this.onChange}
-                              value={this.state.fields["roomNumber"]}
-                              required>
                         <option value="please select" key="please select">
                           Please Select
                         </option>
-                        {this.state.rooms.map((i) => {
+                        {this.state.bookings.map((i) => {
                           return (
-                              <option value={i.roomNumber} key={i.roomNumber}>
-                                {i.roomNumber}
+                              <option value={i.bookingNumber} key={i.bookingNumber}>
+                                {i.bookingNumber}
                               </option>
                           );
                         })}
@@ -246,15 +195,15 @@ export default class ModifyRoom extends React.Component {
               <tr>
                 <div className="form-group mb-3">
                   <td style={{width: '250px'}}>
-                    <label className="form-label">Hotel Number</label>
+                    <label className="form-label">Booking Number</label>
                   </td>
                   <td style={{width: `400px`}}>
                     <input
-                        name='hotelNum'
+                        name='bookingNum'
                         type="text"
                         className="form-control"
-                        placeholder="Enter Hotel Number For Reference"
-                        defaultValue={this.state.room.hotelNumber}
+                        placeholder="Enter Booking Number For Reference"
+                        value={this.state.booking.bookingNumber}
                         onChange={this.onChange}
                     />
                   </td>
@@ -263,15 +212,15 @@ export default class ModifyRoom extends React.Component {
               <tr>
                 <div className="form-group mb-3">
                   <td style={{width: '250px'}}>
-                    <label className="form-label">Room Number</label>
+                    <label className="form-label">User Id</label>
                   </td>
                   <td style={{width: `400px`}}>
                     <input
-                        name='roomNumber'
+                        name='userId'
                         type="text"
                         className="form-control"
-                        placeholder="Enter Room Number"
-                        defaultValue={this.state.room.roomNumber}
+                        placeholder="Enter User Id"
+                        value={this.state.booking.userId}
                         onChange={this.onChange}
                     />
                   </td>
@@ -280,15 +229,15 @@ export default class ModifyRoom extends React.Component {
               <tr>
                 <div className="form-group mb-3">
                   <td style={{width: '250px'}}>
-                    <label className="form-label">Room Type</label>
+                    <label className="form-label">Hotel Id</label>
                   </td>
                   <td style={{width: `400px`}}>
                     <input
-                        name = "type"
+                        name = "hotelId"
                         type="text"
                         className="form-control"
-                        placeholder="Enter Room Type"
-                        defaultValue={this.state.room.type}
+                        placeholder="Enter Hotel Id"
+                        value={this.state.booking.hotelId}
                         onChange={this.onChange}
                     />
                   </td>
@@ -297,15 +246,15 @@ export default class ModifyRoom extends React.Component {
               <tr>
                 <div className="form-group mb-3">
                   <td style={{width: '250px'}}>
-                    <label className="form-label">Room Image</label>
+                    <label className="form-label">Room Id</label>
                   </td>
                   <td style={{width: `400px`}}>
                     <input
-                        name = "image"
+                        name = "roomId"
                         type="text"
                         className="form-control"
-                        placeholder="Enter Room Image Link"
-                        defaultValue={this.state.room.image}
+                        placeholder="Enter Room Id"
+                        value={this.state.booking.roomId}
                         onChange={this.onChange}
                     />
                   </td>
@@ -314,15 +263,15 @@ export default class ModifyRoom extends React.Component {
               <tr>
                 <div className="form-group mb-3">
                   <td style={{width: '250px'}}>
-                    <label className="form-label">Room Description</label>
+                    <label className="form-label">Start Date</label>
                   </td>
                   <td style={{width: `400px`}}>
                     <input
-                        name = "description"
+                        name = "startDate"
                         type="text"
                         className="form-control"
-                        placeholder="Enter Room Description"
-                        defaultValue={this.state.room.description}
+                        placeholder="Enter Start Date"
+                        value={(this.state.booking.startDate)}
                         onChange={this.onChange}
                     />
                   </td>
@@ -331,15 +280,15 @@ export default class ModifyRoom extends React.Component {
               <tr>
                 <div className="form-group mb-3">
                   <td style={{width: '250px'}}>
-                    <label className="form-label">Room Type Charge</label>
+                    <label className="form-label">End Date</label>
                   </td>
                   <td style={{width: `400px`}}>
                     <input
-                        name = "typeCharge"
+                        name = "endDate"
                         type="text"
                         className="form-control"
-                        placeholder="Enter Room Type Charge"
-                        defaultValue={this.state.room.typeCharge}
+                        placeholder="Enter End Date"
+                        value={(this.state.booking.endDate)}
                         onChange={this.onChange}
                     />
                   </td>
@@ -348,15 +297,15 @@ export default class ModifyRoom extends React.Component {
               <tr>
                 <div className="form-group mb-3">
                   <td style={{width: '250px'}}>
-                    <label className="form-label">Room Base Price</label>
+                    <label className="form-label">Guests</label>
                   </td>
                   <td style={{width: `400px`}}>
                     <input
-                        name = "roomBasePrice"
+                        name = "guests"
                         type="text"
                         className="form-control"
-                        placeholder="Enter Room Base Price"
-                        defaultValue={this.state.room.roomBasePrice}
+                        placeholder="Enter Total Guests"
+                        value={this.state.booking.guests}
                         onChange={this.onChange}
                     />
                   </td>
@@ -365,26 +314,45 @@ export default class ModifyRoom extends React.Component {
               <tr>
                 <div className="form-group mb-3">
                   <td style={{width: '250px'}}>
-                    <label className="form-label">Room Current Price</label>
+                    <label className="form-label">Amount</label>
                   </td>
                   <td style={{width: `400px`}}>
                     <input
-                        name = "currentPrice"
+                        name = "amount"
                         type="text"
                         className="form-control"
-                        placeholder="Enter Room Current Price"
-                        defaultValue={this.state.room.currentPrice}
+                        placeholder="Enter Booking Amount"
+                        value={this.state.booking.amount}
                         onChange={this.onChange}
                     />
                   </td>
                 </div>
               </tr>
+              <tr>
+                <div className="form-group mb-3">
+                  <td style={{width: '250px'}}>
+                    <label className="form-label">Status</label>
+                  </td>
+                  <td style={{width: `400px`}}>
+                    <input
+                        name = "status"
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Booking Status"
+                        value={this.state.booking.status}
+                        onChange={this.onChange}
+                    />
+                  </td>
+                </div>
+              </tr>
+
+
 
             </table>
 
 
             <button className="btn btn-primary">
-              Update
+              Cancel
             </button>
             </center>
           </form>
