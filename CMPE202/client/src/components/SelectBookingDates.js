@@ -20,12 +20,12 @@ export default class SelectBookingDates extends React.Component {
           hotels: [],
           rooms: [],
           result: [],
-          hotelNumber: "",
+          hotelLocation: "",
           startDate:"",
           endDate:"",
         };
        console.log(props.location.state)
-       this.state.hotelNumber=props.location.state;
+       this.state.hotelLocation=props.location.state;
       }
 
       onChange = (e) => {
@@ -40,15 +40,15 @@ export default class SelectBookingDates extends React.Component {
       onSubmit = (e) => {
         e.preventDefault();
         let data = {
-            hotelNumber: this.state.hotelNumber,
+          hotelLocation: this.state.hotelLocation,
             startDate: this.state.startDate,
             endDate: this.state.endDate,
-            types: this.state.types
+            type: this.state.type
           };
           console.log(data);
   
           //update API
-          axios.post(`${process.env.REACT_APP_API}/getRoomFromHotel`, data,  {
+          axios.post(`${process.env.REACT_APP_API}/getHotelFromLocationAndDates`, data,  {
             headers: {
                 authorization: localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')).result.token: ""
             }
@@ -118,9 +118,9 @@ export default class SelectBookingDates extends React.Component {
         <label> Room Type</label>
   
         
-          <select name='types'
+          <select name='type'
                   onChange={this.onChange}
-                  value={this.state.fields["types"]}
+                  value={this.state.fields["type"]}
                   required>        
             <option value='single'>
               Single
@@ -137,7 +137,7 @@ export default class SelectBookingDates extends React.Component {
       {(dateError) ? <p className="text-danger">Booking range can not exceed a week</p> : <p></p> }
                 </div>
 
-                    <button className="btn btn-primary" disabled={!this.state.startDate || !this.state.endDate || !this.state.types || dateError}>
+                    <button className="btn btn-primary" disabled={!this.state.startDate || !this.state.endDate || !this.state.type || dateError}>
                     Submit
                     </button>
                 </form>
