@@ -1,7 +1,7 @@
 const AddRoomForm = ({
                           handleSubmit,
                           hotelNumber, setHotelNumber,
-                          roomNumber, setRoomNumber,
+                          // roomNumber, setRoomNumber,
                           type, setType,
                           image, setImage,
                           description, setDescription,
@@ -28,22 +28,22 @@ const AddRoomForm = ({
                   </td>
               </div>
           </tr>
-          <tr>
-              <div className="form-group mb-3">
-                  <td style={{width: '250px'}}>
-                      <label className="form-label">Room Number</label>
-                  </td>
-                  <td style={{width: `400px`}}>
-                      <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Enter Room Number"
-                          value={roomNumber}
-                          onChange={(e) => setRoomNumber(e.target.value)}
-                      />
-                  </td>
-              </div>
-          </tr>
+          {/*<tr>*/}
+          {/*    <div className="form-group mb-3">*/}
+          {/*        <td style={{width: '250px'}}>*/}
+          {/*            <label className="form-label">Room Number</label>*/}
+          {/*        </td>*/}
+          {/*        <td style={{width: `400px`}}>*/}
+          {/*            <input*/}
+          {/*                type="text"*/}
+          {/*                className="form-control"*/}
+          {/*                placeholder="Enter Room Number"*/}
+          {/*                value={roomNumber}*/}
+          {/*                onChange={(e) => setRoomNumber(e.target.value)}*/}
+          {/*            />*/}
+          {/*        </td>*/}
+          {/*    </div>*/}
+          {/*</tr>*/}
           <tr>
               <div className="form-group mb-3">
                   <td style={{width: '250px'}}>
@@ -143,7 +143,7 @@ const AddRoomForm = ({
 
       </table>
 
-      <button disabled={!hotelNumber || !roomNumber || !type || !typeCharge || !roomBasePrice } className="btn btn-primary">
+      <button disabled={!hotelNumber ||  !type || !typeCharge || !roomBasePrice } className="btn btn-primary">
           Add Room
       </button>
   </form>

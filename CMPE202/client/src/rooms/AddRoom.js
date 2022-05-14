@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const AddRoom = ({ history }) => {
   const [hotelNumber, setHotelNumber] = useState("");
-  const [roomNumber, setRoomNumber] = useState("");
+  // const [roomNumber, setRoomNumber] = useState("");
   const [type, setType] = useState("");
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
@@ -23,7 +23,7 @@ const AddRoom = ({ history }) => {
     e.preventDefault();
     try {
       const res = await addroom({
-        hotelNumber, roomNumber, type, image, description, typeCharge, roomBasePrice, currentPrice
+        hotelNumber, type, image, description, typeCharge, roomBasePrice, currentPrice
       });
       console.log("Add Room ===> ", res);
       toast.success("Room Added Successfully");
@@ -53,8 +53,8 @@ const AddRoom = ({ history }) => {
                   handleSubmit={handleSubmit}
                   hotelNumber={hotelNumber}
                   setHotelNumber={setHotelNumber}
-                  roomNumber={roomNumber}
-                  setRoomNumber={setRoomNumber}
+                  // roomNumber={roomNumber}
+                  // setRoomNumber={setRoomNumber}
                   type={type}
                   setType={setType}
                   image={image}
