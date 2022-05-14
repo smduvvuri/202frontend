@@ -56,6 +56,18 @@ export default class Payment extends React.Component {
     });
   };
 
+  componentDidMount() {
+    axios.post(`${process.env.REACT_APP_API}/getAllHotels`, {
+        headers: {
+            authorization: JSON.parse(localStorage.getItem('auth')).result.token
+        }
+    }).then(res => {
+            const hotels = res.data.hotels;
+            this.setState({hotels});
+        })
+    console.log(this.state.hotels);
+}
+
 
 
     render() {
@@ -76,7 +88,7 @@ export default class Payment extends React.Component {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Enter Card Details"
+                  placeholder="Card"
                   name="address"
                   onChange={this.onChange}
                   value={this.state.fields["cardnumber"]}
@@ -86,7 +98,7 @@ export default class Payment extends React.Component {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Enter Expiry Month"
+                  placeholder="Expiry Month"
                   name="address"
                   onChange={this.onChange}
                   value={this.state.fields["expirymonth"]}
@@ -96,7 +108,7 @@ export default class Payment extends React.Component {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Enter Expiry Year"
+                  placeholder="Expiry Year"
                   name="address"
                   onChange={this.onChange}
                   value={this.state.fields["expiryyear"]}
@@ -106,7 +118,7 @@ export default class Payment extends React.Component {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Enter CVV"
+                  placeholder="CVV"
                   name="address"
                   onChange={this.onChange}
                   value={this.state.fields["cvv"]}
@@ -128,7 +140,7 @@ export default class Payment extends React.Component {
                        status: this.props.location.state.status,       
                     }
                     }}>
-                     Pay
+                     <h4 style={{color:'cornflowerblue', textAlign:'center', marginTop:'20px'}}>Pay</h4>
                     </Link>
 
 

@@ -6,6 +6,7 @@ import ConnectNav from "../components/ConnectNav";
 import UserDashboardNav from './UserDashboardNav';
 import {Redirect, Link} from "react-router-dom";
 
+
 let searchResult=false;
 
 
@@ -57,7 +58,8 @@ export default class Confirmation extends React.Component {
             startDate:this.props.location.state.startDate,
             endDate:this.props.location.state.endDate,
             guests: this.props.location.state.guests,
-            status: this.props.location.state.status
+            status: this.props.location.state.status,
+            price: '6789'
         };
         axios.post(`${process.env.REACT_APP_API}/addBooking`,data, {
           headers: {
@@ -87,27 +89,28 @@ export default class Confirmation extends React.Component {
                 </div>
                 
                <form>
+                   <div style={{textAlign:'center'}}>
                    <h4>Booking Confirmed!
                    </h4>
-                   <h3>
+                   <h5>
                        The following are the booking details:
-                   </h3>
+                   </h5>
 
                    <p>
                    
-                       Booking Number: {this.props.location.state.bookingNumber},
-                       User ID: {this.props.location.state.userId},
-                       Hotel Number:{this.props.location.state.hotelId},
-                       Room Number:{this.props.location.state.roomId},
-                       Start Date:{this.props.location.state.startDate},
-                       End Date:{this.props.location.state.endDate},
-                       Number of Guests: {this.props.location.state.guests},
-                       Status: {this.props.location.state.status},  
-                       Amount Paid: {this.props.location.state.amount}
+                       Booking Number: {this.props.location.state.bookingNumber} <br></br>
+                       User ID: {this.props.location.state.userId}<br></br>
+                       Hotel Number:{this.props.location.state.hotelId}<br></br>
+                       Room Number:{this.props.location.state.roomId}<br></br>
+                       Start Date:{this.props.location.state.startDate}<br></br>
+                       End Date:{this.props.location.state.endDate}<br></br>
+                       Number of Guests: {this.props.location.state.guests}<br></br>
+                       Status: {this.props.location.state.status}<br></br>
+                       Amount Paid: {this.props.location.state.amount}<br></br>
 
 
                    </p>
-         
+                   </div>
                 </form>
             </>
         )

@@ -212,39 +212,33 @@ export default class ViewRoomsByHotel extends React.Component {
                  checked={this.state.meals}
                  />
 
-
-               
-
-                <div>
-        <label> Number of Guests</label>
-  
-        
-          <select name='guests'
+              <div>
+              <label> Number of Guests</label>
+              <select name='guests'
                   onChange={this.onChange}
                   value={this.state.fields["guests"]}
                   required>        
-            <option value='1'>
-              1
-            </option>
-            <option value='2'>
-              2
-            </option>
-            <option value='3'>
-              3
-            </option> 
-          </select>
-      
-      </div>
+                <option value='1'>
+                1
+                </option>
+                <option value='2'>
+                2
+                </option>
+                <option value='3'>
+                3
+                </option> 
+              </select>
+              </div>
 
-      <div className="registerButton">
-                <Button type="submit">
-                  Book Room
-                </Button>
-                </div>
+              <div className="registerButton">
+              <Button type="submit">
+                Book Room
+              </Button>
+              </div>
 
-                </div>
+              </div>
 
-                </form>
+              </form>
 
             </>
         )

@@ -5,8 +5,8 @@ import ConnectNav from "../components/ConnectNav";
 import UserDashboardNav from './UserDashboardNav';
 import {Link} from "react-router-dom";
 import moment from "moment";
-
 let searchResult=false;
+let dateError=false;
 
 
 export default class SelectBookingDates extends React.Component {
@@ -65,6 +65,15 @@ export default class SelectBookingDates extends React.Component {
     render() {
         if(this.state.startDate===null || this.state.endDate===null)
         searchResult=false;
+        dateError=false;
+        var a = moment(this.state.startDate);
+        var b = moment(this.state.endDate);
+        let difference=b.diff(a, 'days');
+        if(difference>7){
+          dateError=true;
+        }
+        console.log(dateError);
+        console.log(difference);
         return (
             
             <>
@@ -87,7 +96,7 @@ export default class SelectBookingDates extends React.Component {
                   name="startDate"
                   onChange={this.onChange}
                   value={this.state.fields['startDate']}
-                  max={moment().format("YYYY-MM-DD")}
+                  max={this.state.endDate}
                 />
                 </div>
 
@@ -100,10 +109,12 @@ export default class SelectBookingDates extends React.Component {
                   name="endDate"
                   onChange={this.onChange}
                   value={this.state.fields['endDate']}
-                  max={moment().format("YYYY-MM-DD")}
+                  min={this.state.startDate}
                 />
 
-<div>
+
+
+                <div>
         <label> Room Type</label>
   
         
@@ -123,9 +134,10 @@ export default class SelectBookingDates extends React.Component {
           </select>
       
       </div>
+      {(dateError) ? <p className="text-danger">Booking range can not exceed a week</p> : <p></p> }
                 </div>
 
-                    <button className="btn btn-primary" disabled={!this.state.startDate || !this.state.endDate || !this.state.types}>
+                    <button className="btn btn-primary" disabled={!this.state.startDate || !this.state.endDate || !this.state.types || dateError}>
                     Submit
                     </button>
                 </form>

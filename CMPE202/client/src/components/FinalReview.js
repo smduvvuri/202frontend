@@ -76,24 +76,24 @@ export default class FinalReview extends React.Component {
                 </div>
                 
                <form>
+                  <div style={{marginLeft:'20px'}}>
                    <h4>The final estimated price is ${this.props.location.state.price}
                    </h4>
                    <p>Do you want to continue?</p>
-         
+                  
                 <div style={{display:'flex', flexDirection:'row'}} >
-                <div>
-                <Link className="nav-link" to="/listHotelByLocation">
-            No
-          </Link>
+                <div style={{marginRight:'10px'}}>
+                <Link to="/listHotelByLocation">
+                  No    
+                </Link>
                 </div>
-
                 <div>
                 <Link to={{ 
                     
                 pathname: "/payment", 
                 state: {
 
-                    amount: this.props.location.state.price,
+                   amount: this.props.location.state.price,
                    bookingNumber: this.props.location.state.bookingNumber,
                    userId: this.props.location.state.userId,
                    hotelId:this.props.location.state.hotelNumber,
@@ -108,6 +108,7 @@ export default class FinalReview extends React.Component {
                 }}>
                 Proceed to Payment
                 </Link>
+                </div>
                 </div>
                 </div>
                 </form>
