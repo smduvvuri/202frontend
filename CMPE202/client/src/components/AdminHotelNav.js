@@ -31,6 +31,14 @@ const AdminHotelNav = () => {
           Modify Hotel
         </Link>
       </li>
+        <li className="nav-item">
+            <Link
+                className={`nav-link ${active === "/hotel/delete" && "active"}`}
+                to="/hotel/delete"
+            >
+                Delete Hotel
+            </Link>
+        </li>
     </ul>
   );
 };

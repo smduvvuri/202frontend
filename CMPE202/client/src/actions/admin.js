@@ -21,5 +21,12 @@ export const addhotel = async (hotel) =>
       }
   });
 
+export const addroom = async (room) =>
+    await axios.post(`${process.env.REACT_APP_API}/addRoom`, room, {
+        headers: {
+            authorization: localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')).result.token: ""
+        }
+    });
+
  export const login = async (user) =>
 await axios.post(`${process.env.REACT_APP_API}/signin`, user);

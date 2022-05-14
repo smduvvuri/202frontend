@@ -118,13 +118,13 @@ const AddHotelForm = ({
           <tr>
               <div className="form-group mb-3">
                   <td style={{width: '250px'}}>
-                      <label className="form-label">Is Breakfast Available ? (true/false)</label>
+                      <label className="form-label">Breakfast Charge</label>
                   </td>
                   <td style={{width: `400px`}}>
                       <input
                           type="text"
                           className="form-control"
-                          placeholder="Enter Answer"
+                          placeholder="Enter Breakfast Charge"
                           value={breakfast}
                           onChange={(e) => setBreakfast(e.target.value)}
                       />
@@ -134,13 +134,13 @@ const AddHotelForm = ({
           <tr>
               <div className="form-group mb-3">
                   <td style={{width: '250px'}}>
-                      <label className="form-label">Is Meal Available ? (true/false)</label>
+                      <label className="form-label">Meal Charge</label>
                   </td>
                   <td style={{width: `400px`}}>
                       <input
                           type="text"
                           className="form-control"
-                          placeholder="Enter Answer"
+                          placeholder="Enter Meal Charge"
                           value={meal}
                           onChange={(e) => setMeal(e.target.value)}
                       />
@@ -150,13 +150,13 @@ const AddHotelForm = ({
           <tr>
               <div className="form-group mb-3">
                   <td style={{width: '250px'}}>
-                      <label className="form-label">Is Gym Available ? (true/false)</label>
+                      <label className="form-label">Gym Charge</label>
                   </td>
                   <td style={{width: `400px`}}>
                       <input
                           type="text"
                           className="form-control"
-                          placeholder="Enter Answer"
+                          placeholder="Enter Gym Charge"
                           value={gym}
                           onChange={(e) => setGym(e.target.value)}
                       />
@@ -166,13 +166,13 @@ const AddHotelForm = ({
           <tr>
               <div className="form-group mb-3">
                   <td style={{width: '250px'}}>
-                      <label className="form-label">Is Pool Available ? (true/false)</label>
+                      <label className="form-label">Pool Charge</label>
                   </td>
                   <td style={{width: `400px`}}>
                       <input
                           type="text"
                           className="form-control"
-                          placeholder="Enter Answer"
+                          placeholder="Enter Pool Charge"
                           value={pool}
                           onChange={(e) => setPool(e.target.value)}
                       />
@@ -182,13 +182,13 @@ const AddHotelForm = ({
           <tr>
               <div className="form-group mb-3">
                   <td style={{width: '250px'}}>
-                      <label className="form-label">Is Parking Available ? (true/false)</label>
+                      <label className="form-label">Parking Charge</label>
                   </td>
                   <td style={{width: `400px`}}>
                       <input
                           type="text"
                           className="form-control"
-                          placeholder="Enter Answer"
+                          placeholder="Enter Parking Charge"
                           value={parking}
                           onChange={(e) => setParking(e.target.value)}
                       />

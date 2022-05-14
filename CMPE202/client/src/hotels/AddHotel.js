@@ -37,7 +37,7 @@ const AddHotel = ({ history }) => {
       });
       console.log("Add Hotel ===> ", res);
       toast.success("Hotel Added Successfully");
-      history.push("/hotelNav");
+      // history.push("/hotelNav");
     } catch (err) {
       console.log(err);
       if (err.response.status === 400) toast.error(err.response.data);

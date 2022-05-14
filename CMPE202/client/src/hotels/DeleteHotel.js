@@ -9,7 +9,7 @@ import {toast} from "react-toastify";
 
 let searchResult=false;
 
-export default class ModifyHotel extends React.Component {
+export default class DeleteHotel extends React.Component {
 
 
 
@@ -42,27 +42,12 @@ export default class ModifyHotel extends React.Component {
     e.preventDefault();
     // console.log(this.state.hotelNumber);
     let data = {
-      hotelNum: this.state.hotelNum,
-      hotelName: (this.state.hotelName)?this.state.hotelName:this.state.hotel.hotelName,
-      hotelDescription: this.state.hotelDescription,
-      hotelLocation: this.state.hotelLocation,
-      hotelAddress: this.state.hotelAddress,
-      hotelImage: this.state.hotelImage,
-      breakfast: this.state.breakfast,
-      meal: this.state.meal,
-      gym: this.state.gym,
-      pool: this.state.pool,
-      parking: this.state.parking,
-      hotelCharge: this.state.hotelCharge,
-      weekendCharge: this.state.weekendCharge,
-      holidayCharge: this.state.holidayCharge,
-      seasonCharge: this.state.seasonCharge
-
+      hotelName: this.state.hotel.hotelName
     };
 
     // console.log(data);
 
-    axios.post(`${process.env.REACT_APP_API}/updateHotel`, data, {
+    axios.post(`${process.env.REACT_APP_API}/deleteHotel`, data, {
       headers: {
         authorization: localStorage.getItem('auth') && JSON.parse(localStorage.getItem('auth')).result.token
       }
@@ -75,8 +60,8 @@ export default class ModifyHotel extends React.Component {
         // this.setState({
         //   hotel: response.data.hotel,
         // });
-        toast.success("Hotel Updated Successfully");
-        console.log("updated ");
+        toast.success("Hotel Deleted Successfully");
+        console.log("deleted ");
       }
     });
 
@@ -208,7 +193,7 @@ export default class ModifyHotel extends React.Component {
                         type="text"
                         className="form-control"
                         placeholder="Enter Hotel Number For Reference"
-                        defaultValue={this.state.hotel.hotelNumber}
+                        value={this.state.hotel.hotelNumber}
                         onChange={this.onChange}
                     />
                   </td>
@@ -225,7 +210,7 @@ export default class ModifyHotel extends React.Component {
                         type="text"
                         className="form-control"
                         placeholder="Enter Hotel Name"
-                        defaultValue={this.state.hotel.hotelName}
+                        value={this.state.hotel.hotelName}
                         onChange={this.onChange}
                     />
                   </td>
@@ -242,7 +227,7 @@ export default class ModifyHotel extends React.Component {
                         type="text"
                         className="form-control"
                         placeholder="Enter Hotel Description"
-                        defaultValue={this.state.hotel.hotelDescription}
+                        value={this.state.hotel.hotelDescription}
                         onChange={this.onChange}
                     />
                   </td>
@@ -259,7 +244,7 @@ export default class ModifyHotel extends React.Component {
                         type="text"
                         className="form-control"
                         placeholder="Enter Hotel Locationn"
-                        defaultValue={this.state.hotel.hotelLocation}
+                        value={this.state.hotel.hotelLocation}
                         onChange={this.onChange}
                     />
                   </td>
@@ -276,7 +261,7 @@ export default class ModifyHotel extends React.Component {
                         type="text"
                         className="form-control"
                         placeholder="Enter Hotel Address"
-                        defaultValue={this.state.hotel.hotelAddress}
+                        value={this.state.hotel.hotelAddress}
                         onChange={this.onChange}
                     />
                   </td>
@@ -293,7 +278,7 @@ export default class ModifyHotel extends React.Component {
                         type="text"
                         className="form-control"
                         placeholder="Enter Hotel Image"
-                        defaultValue={this.state.hotel.hotelImage}
+                        value={this.state.hotel.hotelImage}
                         onChange={this.onChange}
                     />
                   </td>
@@ -310,7 +295,7 @@ export default class ModifyHotel extends React.Component {
                         type="text"
                         className="form-control"
                         placeholder="Enter Breakfast Charge"
-                        defaultValue={this.state.hotel.breakfast}
+                        value={this.state.hotel.breakfast}
                         onChange={this.onChange}
                     />
                   </td>
@@ -327,7 +312,7 @@ export default class ModifyHotel extends React.Component {
                         type="text"
                         className="form-control"
                         placeholder="Enter Meal Charge"
-                        defaultValue={this.state.hotel.meal}
+                        value={this.state.hotel.meal}
                         onChange={this.onChange}
                     />
                   </td>
@@ -344,7 +329,7 @@ export default class ModifyHotel extends React.Component {
                         type="text"
                         className="form-control"
                         placeholder="Enter Gym Charge"
-                        defaultValue={this.state.hotel.gym}
+                        value={this.state.hotel.gym}
                         onChange={this.onChange}
                     />
                   </td>
@@ -361,7 +346,7 @@ export default class ModifyHotel extends React.Component {
                         type="text"
                         className="form-control"
                         placeholder="Enter Pool Charge"
-                        defaultValue={this.state.hotel.pool}
+                        value={this.state.hotel.pool}
                         onChange={this.onChange}
                     />
                   </td>
@@ -378,7 +363,7 @@ export default class ModifyHotel extends React.Component {
                         type="text"
                         className="form-control"
                         placeholder="Enter Parking Charge"
-                        defaultValue={this.state.hotel.parking}
+                        value={this.state.hotel.parking}
                         onChange={this.onChange}
                     />
                   </td>
@@ -395,7 +380,7 @@ export default class ModifyHotel extends React.Component {
                         type="text"
                         className="form-control"
                         placeholder="Enter Hotel Charge"
-                        defaultValue={this.state.hotel.hotelCharge}
+                        value={this.state.hotel.hotelCharge}
                         onChange={this.onChange}
                     />
                   </td>
@@ -412,7 +397,7 @@ export default class ModifyHotel extends React.Component {
                         type="text"
                         className="form-control"
                         placeholder="Enter Weekend Charge"
-                        defaultValue={this.state.hotel.weekendCharge}
+                        value={this.state.hotel.weekendCharge}
                         onChange={this.onChange}
                     />
                   </td>
@@ -429,7 +414,7 @@ export default class ModifyHotel extends React.Component {
                         type="text"
                         className="form-control"
                         placeholder="Enter Holiday Charge"
-                        defaultValue={this.state.hotel.holidayCharge}
+                        value={this.state.hotel.holidayCharge}
                         onChange={this.onChange}
                     />
                   </td>
@@ -446,7 +431,7 @@ export default class ModifyHotel extends React.Component {
                         type="text"
                         className="form-control"
                         placeholder="Enter Season Charge"
-                        defaultValue={this.state.hotel.seasonCharge}
+                        value={this.state.hotel.seasonCharge}
                         onChange={this.onChange}
                     />
                   </td>
@@ -458,7 +443,7 @@ export default class ModifyHotel extends React.Component {
 
 
             <button className="btn btn-primary">
-              Update
+              Delete
             </button>
             </center>
           </form>
