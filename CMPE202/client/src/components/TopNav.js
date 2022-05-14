@@ -49,12 +49,6 @@ const TopNav = () => {
           </Link>
       )}  
 
-       {auth !== null && auth.result.adminType === `user` && (
-          <Link className="nav-link" to="/billing">
-            Reward Points
-          </Link>
-      )}
-
       {auth !== null && auth.result.adminType === `user` && (
           <Link className="nav-link" to="/listHotels">
             Search Hotels
