@@ -32,6 +32,11 @@ import MyBookings from "./booking/MyBookings";
 import ModifyBooking from "./booking/ModifyBooking";
 import DeleteBooking from "./booking/DeleteBooking";
 import ProfileManagement from "./user/profileManagement";
+import ViewRoomsByHotel from "./components/ViewRoomsByHotel";
+import SelectBookingDates from "./components/SelectBookingDates";
+import FinalReview from "./components/FinalReview";
+import Confirmation from "./components/Confirmation";
+import Payment from "./components/Payment";
 
 function App() {
   return (
@@ -68,6 +73,11 @@ function App() {
         <PrivateRoute exact path="/booking/delete" component={DeleteBooking}/>
         <PrivateRoute exact path="/bookingNav" component={BookingManagement} />
         <PrivateRoute exact path="/searchHotelDashboard" component={SearchHotelDashboard} />
+        <PrivateRoute exact path="/viewroomsbyhotel" component={ViewRoomsByHotel} />
+        <PrivateRoute exact path="/selectbookingdates" component={SelectBookingDates} />
+        <PrivateRoute exact path="/finalreview" component={FinalReview} />
+        <PrivateRoute exact path="/confirmation" component={Confirmation} />
+        <PrivateRoute exact path="/payment" component={Payment} />
       </Switch>
     </BrowserRouter>
   );

@@ -9,6 +9,8 @@ const ConnectNav = () => {
   const { user } = auth;
 
   return (
+  
+    // <div style={{backgroundImage:'url(https://png.pngtree.com/thumb_back/fh260/back_our/20190625/ourmid/pngtree-road-pavement-dream-success-road-image_262191.jpg)', backgroundRepeat:'no-repeat', backgroundSize:'cover'}}>
     <div className="d-flex justify-content-around">
       <Card>
         <Meta
@@ -17,7 +19,8 @@ const ConnectNav = () => {
            description={` Welcome!`}
         />
       </Card>
-    </div>
+      </div>
+      // </div>
   );
 };
 
