@@ -38,6 +38,7 @@ export default class SelectBookingDates extends React.Component {
      
 
       onSubmit = (e) => {
+        searchResult=false;
         e.preventDefault();
         let data = {
           hotelLocation: this.state.hotelLocation,
