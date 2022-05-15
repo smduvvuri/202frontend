@@ -44,14 +44,15 @@ export default class ModifyBooking extends React.Component {
     // console.log(this.state.hotelNumber);
     let data = {
       bookingNumber: (this.state.bookingNum)?this.state.bookingNum:this.state.booking.bookingNumber,
-      userId: this.state.userId,
-      hotelId: this.state.hotelId,
-      roomId: this.state.roomId,
-      amount: this.state.amount,
-      startDate: this.state.startDate,
-      endDate: this.state.endDate,
-      guests: this.state.guests,
-      status: this.state.status
+      roomNumber: (this.state.roomId)?this.state.roomId:this.state.booking.roomId,
+      userId: this.state.booking.userId,
+      hotelId: (this.state.hotelId)?this.state.hotelId:this.state.booking.hotelId,
+      roomId: (this.state.roomId)?this.state.roomId:this.state.booking.roomId,
+      amount: (this.state.amount)?this.state.amount:this.state.booking.amount,
+      startDate: (this.state.startDate)?this.state.startDate:this.state.booking.startDate,
+      endDate: (this.state.endDate)?this.state.endDate:this.state.booking.endDate,
+      guests: (this.state.guests)?this.state.guests:this.state.booking.guests,
+      status: (this.state.status)?this.state.status:this.state.booking.status
 
     };
 
