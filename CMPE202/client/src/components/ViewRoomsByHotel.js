@@ -34,7 +34,8 @@ export default class ViewRoomsByHotel extends React.Component {
           fitness: false,
           swimming: false,
           parking: false,
-          meals: false
+          meals: false,
+          price:null,
 
         };
        this.state.roomNumber=props.location.state.roomNumber;
@@ -62,25 +63,28 @@ export default class ViewRoomsByHotel extends React.Component {
             swimming: this.state.swimming,
             parking: this.state.parking,
             meals: this.state.meals,
-            guests: this.state.guests
+            guests: this.state.guests,
+            roomNumber: this.state.roomNumber,
+            hotelNumber: this.state.hotelNumber,
+            startDate: this.state.startDate,
+            endDate: this.state.endDate
           };
 
           console.log(data);
 
           //calculate final price & redirect to final review
-           axios.post(`${process.env.REACT_APP_API}/getAllHotels`, data, {
+           axios.post(`${process.env.REACT_APP_API}/calculatePrice`, data, {
             headers: {
                 authorization: localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')).result.token: ""
             }
         }).then((response) => {
             if (response.data) {
                 this.setState({
-                  message: "ok"
+                  message: "ok",
+                  price: response.data.price,
                 });
-     
-                console.log(this.state.message)
-                const result = response.data.price;
-                this.setState({result});
+               
+               
             }
           });              
       };
@@ -104,17 +108,21 @@ export default class ViewRoomsByHotel extends React.Component {
         redirectVar =  <Redirect to={
           {
           pathname: '/finalreview',
-          state: { price: '123',
+          state: { price: this.state.price,
                    bookingNumber: '12345',
-                   userId: JSON.parse(localStorage.getItem('auth')).result.email,
+                   userId: JSON.parse(localStorage.getItem('auth')).result.userId,
                    hotelNumber:this.state.hotelNumber,
                    roomNumber:this.state.roomNumber,
                    startDate:this.state.startDate,
                    endDate:this.state.endDate,
                    guests: this.state.guests,
                    status: 'Success',
-                   startDate:this.state.startDate,
-                   endDate:this.state.endDate
+                   
+                   breakfast: this.state.breakfast,
+            fitness: this.state.fitness,
+            swimming: this.state.swimming,
+            parking: this.state.parking,
+            meals: this.state.meals,
         }
       }
     } />

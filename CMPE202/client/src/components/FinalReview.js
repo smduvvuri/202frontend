@@ -6,8 +6,7 @@ import ConnectNav from "../components/ConnectNav";
 import UserDashboardNav from './UserDashboardNav';
 import {Redirect, Link} from "react-router-dom";
 
-let searchResult=false;
-
+let rewardError=false;
 
 export default class FinalReview extends React.Component {
     constructor(props) {
@@ -39,12 +38,12 @@ export default class FinalReview extends React.Component {
           startDate:"",
           endDate:"",
           guests:"",
-          status:""
-        
-        
+          status:"",
+          rewardPoints:"",
+          rewardInputValue:"",
         };
-       console.log(props.location.state)
-  
+       console.log(props.location.state)  
+
       }
 
      onChange = (e) => {
@@ -53,17 +52,34 @@ export default class FinalReview extends React.Component {
     });
   };
 
+  componentDidMount() {
+    rewardError=false;
 
+    let data={
+      userId: JSON.parse(localStorage.getItem('auth')).result.userId,
+  };
+    axios.post(`${process.env.REACT_APP_API}/getProfile`, data, {
+        headers: {
+            authorization:  JSON.parse(localStorage.getItem('auth')).result.token
+        }
+    })
+        .then((response) => {
+          if (response.data) {
+            rewardError=false;
+            console.log(response.data);
+              const rooms = response.data.profile.rewardPoints;
+              this.setState({rooms});
+              console.log(rooms);
+          }
+        }); 
+}
 
     render() {
-      let redirectVar=null;
+      let rewardError=false;
 
-      if (this.state.message === "ok") {
-        redirectVar = <Redirect to="/confirmation" />;
-      } else if (this.state.message === "notok") {
-        alert("Something went wrong.");
-      }
-        return (
+      let redirectVar=null;
+ 
+     return (
           
             <>
             {redirectVar}
@@ -79,8 +95,25 @@ export default class FinalReview extends React.Component {
                   <div style={{marginLeft:'20px'}}>
                    <h4>The final estimated price is ${this.props.location.state.price}
                    </h4>
-                   <p>Do you want to continue?</p>
+                
+
+
+                   <h4>Current Reward Points: {this.state.rooms} </h4>
+                   <div className="form-group">
+                <label>Use Reward Points</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Enter"
+                  name="usepoints"
+                  onChange={this.onChange}
+                  value={this.state.fields["usepoints"]}
+                />
+              </div>
+
                   
+                  
+                <p>Do you want to continue?</p>
                 <div style={{display:'flex', flexDirection:'row'}} >
                 <div style={{marginRight:'10px'}}>
                 <Link to="/listHotelByLocation">
@@ -88,11 +121,9 @@ export default class FinalReview extends React.Component {
                 </Link>
                 </div>
                 <div>
-                <Link to={{ 
-                    
+                <Link to={{     
                 pathname: "/payment", 
                 state: {
-
                    amount: this.props.location.state.price,
                    bookingNumber: this.props.location.state.bookingNumber,
                    userId: this.props.location.state.userId,
@@ -101,9 +132,13 @@ export default class FinalReview extends React.Component {
                    startDate:this.props.location.state.startDate,
                    endDate:this.props.location.state.endDate,
                    guests: this.props.location.state.guests,
-                   status: this.props.location.state.status,
-
-                    
+                   status: this.props.location.state.status,  
+                   rewardPoints: this.state.usepoints,  
+                   breakfast: this.props.location.state.breakfast,
+            fitness: this.props.location.state.fitness,
+            swimming: this.props.location.state.swimming,
+            parking: this.props.location.state.parking,
+            meals: this.props.location.state.meals,    
                 }
                 }}>
                 Proceed to Payment
