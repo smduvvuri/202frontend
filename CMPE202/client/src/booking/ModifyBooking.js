@@ -44,15 +44,20 @@ export default class ModifyBooking extends React.Component {
     // console.log(this.state.hotelNumber);
     let data = {
       bookingNumber: (this.state.bookingNum)?this.state.bookingNum:this.state.booking.bookingNumber,
-      roomNumber: (this.state.roomId)?this.state.roomId:this.state.booking.roomId,
+      roomNumber: (this.state.roomId)?this.state.roomId:this.state.booking.roomNumber,
       userId: this.state.booking.userId,
       hotelId: (this.state.hotelId)?this.state.hotelId:this.state.booking.hotelId,
-      roomId: (this.state.roomId)?this.state.roomId:this.state.booking.roomId,
+      roomId: (this.state.roomId)?this.state.roomId:this.state.booking.roomNumber,
       amount: (this.state.amount)?this.state.amount:this.state.booking.amount,
       startDate: (this.state.startDate)?this.state.startDate:this.state.booking.startDate,
       endDate: (this.state.endDate)?this.state.endDate:this.state.booking.endDate,
       guests: (this.state.guests)?this.state.guests:this.state.booking.guests,
-      status: (this.state.status)?this.state.status:this.state.booking.status
+      status: (this.state.status)?this.state.status:this.state.booking.status,
+      breakfast: (this.state.breakfast)?this.state.breakfast:this.state.booking.breakfast,
+      gym: (this.state.gym)?this.state.gym:this.state.booking.gym,
+      pool: (this.state.pool)?this.state.pool:this.state.booking.pool,
+      parking: (this.state.parking)?this.state.parking:this.state.booking.parking,
+      meal: (this.state.meal)?this.state.meal:this.state.booking.meal
 
     };
 
@@ -66,12 +71,17 @@ export default class ModifyBooking extends React.Component {
 
       console.log(response.data);
       if (response.data) {
+        console.log(response.data.diff)
+        if(response.data.payFlag == "yes")
+          toast.success("Booking Updated Successfully, deducted "+response.data.diff+ " from your card");
+        else
+          toast.success("Booking Updated Successfully,  "+response.data.diff+ " refunded to your card");
         // searchResult=true;
         // // console.log(searchResult);
         // this.setState({
         //   hotel: response.data.hotel,
         // });
-        toast.success("Booking Updated Successfully");
+        // toast.success("Booking Updated Successfully");
         console.log("updated ");
       }
     });
@@ -263,7 +273,7 @@ export default class ModifyBooking extends React.Component {
                         type="text"
                         className="form-control"
                         placeholder="Enter Room Id"
-                        defaultValue={this.state.booking.roomId}
+                        defaultValue={this.state.booking.roomNumber}
                         onChange={this.onChange}
                     />
                   </td>
@@ -315,6 +325,91 @@ export default class ModifyBooking extends React.Component {
                         className="form-control"
                         placeholder="Enter Total Guests"
                         defaultValue={this.state.booking.guests}
+                        onChange={this.onChange}
+                    />
+                  </td>
+                </div>
+              </tr>
+              <tr>
+                <div className="form-group mb-3">
+                  <td style={{width: '250px'}}>
+                    <label className="form-label">Breakfast</label>
+                  </td>
+                  <td style={{width: `400px`}}>
+                    <input
+                        name = "breakfast"
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Total Guests"
+                        defaultValue={this.state.booking.breakfast}
+                        onChange={this.onChange}
+                    />
+                  </td>
+                </div>
+              </tr>
+              <tr>
+                <div className="form-group mb-3">
+                  <td style={{width: '250px'}}>
+                    <label className="form-label">Gym</label>
+                  </td>
+                  <td style={{width: `400px`}}>
+                    <input
+                        name = "gym"
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Total Guests"
+                        defaultValue={this.state.booking.gym}
+                        onChange={this.onChange}
+                    />
+                  </td>
+                </div>
+              </tr>
+              <tr>
+                <div className="form-group mb-3">
+                  <td style={{width: '250px'}}>
+                    <label className="form-label">Pool</label>
+                  </td>
+                  <td style={{width: `400px`}}>
+                    <input
+                        name = "pool"
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Total Guests"
+                        defaultValue={this.state.booking.pool}
+                        onChange={this.onChange}
+                    />
+                  </td>
+                </div>
+              </tr>
+              <tr>
+                <div className="form-group mb-3">
+                  <td style={{width: '250px'}}>
+                    <label className="form-label">Parking</label>
+                  </td>
+                  <td style={{width: `400px`}}>
+                    <input
+                        name = "parking"
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Total Guests"
+                        defaultValue={this.state.booking.parking}
+                        onChange={this.onChange}
+                    />
+                  </td>
+                </div>
+              </tr>
+              <tr>
+                <div className="form-group mb-3">
+                  <td style={{width: '250px'}}>
+                    <label className="form-label">Meal</label>
+                  </td>
+                  <td style={{width: `400px`}}>
+                    <input
+                        name = "meal"
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Total Guests"
+                        defaultValue={this.state.booking.meal}
                         onChange={this.onChange}
                     />
                   </td>

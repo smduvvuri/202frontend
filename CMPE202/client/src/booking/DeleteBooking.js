@@ -314,6 +314,91 @@ export default class DeleteBooking extends React.Component {
               <tr>
                 <div className="form-group mb-3">
                   <td style={{width: '250px'}}>
+                    <label className="form-label">Breakfast</label>
+                  </td>
+                  <td style={{width: `400px`}}>
+                    <input
+                        name = "breakfast"
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Total Guests"
+                        value={this.state.booking.breakfast}
+                        onChange={this.onChange}
+                    />
+                  </td>
+                </div>
+              </tr>
+              <tr>
+                <div className="form-group mb-3">
+                  <td style={{width: '250px'}}>
+                    <label className="form-label">Gym</label>
+                  </td>
+                  <td style={{width: `400px`}}>
+                    <input
+                        name = "gym"
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Total Guests"
+                        value={this.state.booking.gym}
+                        onChange={this.onChange}
+                    />
+                  </td>
+                </div>
+              </tr>
+              <tr>
+                <div className="form-group mb-3">
+                  <td style={{width: '250px'}}>
+                    <label className="form-label">Pool</label>
+                  </td>
+                  <td style={{width: `400px`}}>
+                    <input
+                        name = "pool"
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Total Guests"
+                        value={this.state.booking.pool}
+                        onChange={this.onChange}
+                    />
+                  </td>
+                </div>
+              </tr>
+              <tr>
+                <div className="form-group mb-3">
+                  <td style={{width: '250px'}}>
+                    <label className="form-label">Parking</label>
+                  </td>
+                  <td style={{width: `400px`}}>
+                    <input
+                        name = "parking"
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Total Guests"
+                        value={this.state.booking.parking}
+                        onChange={this.onChange}
+                    />
+                  </td>
+                </div>
+              </tr>
+              <tr>
+                <div className="form-group mb-3">
+                  <td style={{width: '250px'}}>
+                    <label className="form-label">Meal</label>
+                  </td>
+                  <td style={{width: `400px`}}>
+                    <input
+                        name = "meal"
+                        type="text"
+                        className="form-control"
+                        placeholder="Enter Total Guests"
+                        value={this.state.booking.meal}
+                        onChange={this.onChange}
+                    />
+                  </td>
+                </div>
+              </tr>
+              <tr>
+                <div className="form-group mb-3">
+                  <td style={{width: '250px'}}>
                     <label className="form-label">Amount</label>
                   </td>
                   <td style={{width: `400px`}}>

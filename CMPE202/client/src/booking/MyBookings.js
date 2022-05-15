@@ -124,8 +124,8 @@ export default class MyBookings extends React.Component {
                                         <td style={{width: '100px'}} key={booking.hotelId}>
                                             {booking.hotelId}
                                         </td>
-                                        <td style={{width: '100px'}} key={booking.roomId}>
-                                            {booking.roomId}
+                                        <td style={{width: '100px'}} key={booking.roomNumber}>
+                                            {booking.roomNumber}
                                         </td>
                                         <td style={{width: '100px'}} key={booking.startDate}>
                                             {(booking.startDate).split("T")[0]}
